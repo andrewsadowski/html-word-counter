@@ -7,5 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andrew Sadowski",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@iarna/word-count": "^1.0.3",
+    "html-to-text": "^4.0.0",
+    "puppeteer": "^1.9.0"
+  }
 }
