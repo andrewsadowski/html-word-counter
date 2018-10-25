@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 
 /**
  * Creates an array of URLs separated by line breaks
