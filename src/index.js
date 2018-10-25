@@ -9,7 +9,7 @@ const argv = require("yargs")
   .example('urlWC -f "/absolute/path/to/file.ext"')
   .help("h").argv;
 
-const { parseUrls, exportToCSV } = require("../helper.js");
+const { parseUrls, parsePath, exportToCSV } = require("../helper.js");
 
 let filePath;
 
@@ -24,8 +24,9 @@ if (argv.f) {
  */
 (async filePath => {
   //Create URL array fomr urls.txt file
-  const urls = parseUrls();
-
+  const urls = parseUrls(filePath);
+  let paths = parsePath(filePath);
+  console.log(paths, paths.fileName, paths.dirPath);
   // Create CSV header
   exportToCSV("URL" + "\t" + "Word Count");
 

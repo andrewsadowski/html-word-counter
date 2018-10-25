@@ -32,6 +32,7 @@ const parsePath = filePath => {
     dirPath
   };
 };
+console.log(parsePath("/Users/admin/dev/nodeTest/html-word-counter/urls.txt"));
 
 /**
  * Appends a new CSV line to the output file
