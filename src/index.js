@@ -1,20 +1,33 @@
-const fs = require('fs');
+const fs = require("fs");
 
-const puppeteer = require('puppeteer');
-const htmlToText = require('html-to-text');
-const wordCount = require('@iarna/word-count');
+const puppeteer = require("puppeteer");
+const htmlToText = require("html-to-text");
+const wordCount = require("@iarna/word-count");
+const argv = require("yargs")
+  .alias("f", "filePath")
+  .usage("Usage: add a file path with the -f flag")
+  .example('urlWC -f "/absolute/path/to/file.ext"')
+  .help("h").argv;
 
-const { parseUrls, exportToCSV } = require('../helper.js');
+const { parseUrls, exportToCSV } = require("../helper.js");
+
+let filePath;
+
+if (argv.f) {
+  filePath = argv.f;
+} else {
+  filePath = "../urls.txt";
+}
 
 /**
  * Gets word count of each URL in URL array
  */
-(async () => {
+(async filePath => {
   //Create URL array fomr urls.txt file
   const urls = parseUrls();
 
   // Create CSV header
-  exportToCSV('URL' + '\t' + 'Word Count');
+  exportToCSV("URL" + "\t" + "Word Count");
 
   //Loop through URL array, launch puppeteer, grab html content,
   //Get a word count => write it to the output csv file
@@ -31,6 +44,6 @@ const { parseUrls, exportToCSV } = require('../helper.js');
     browser.close();
 
     //Format CSV data with tab and line break and append to csv file
-    exportToCSV(url + '\t' + wordCount(text));
+    exportToCSV(url + "\t" + wordCount(text));
   }
-})();
+})(filePath);
