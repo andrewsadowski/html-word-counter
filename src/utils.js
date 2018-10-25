@@ -20,6 +20,20 @@ const parseUrls = filePath => {
 };
 
 /**
+ *
+ * @param {String} filePath - Accepts filePath from user
+ * @return {Object} - returns fileName and dirPath in object
+ */
+const parsePath = filePath => {
+  const fileName = path.basename(filePath);
+  const dirPath = path.dirname(filePath);
+  return {
+    fileName,
+    dirPath
+  };
+};
+
+/**
  * Appends a new CSV line to the output file
  * @param  {String} data String to append to file (CSV formatted)
  */
@@ -33,5 +47,6 @@ const exportToCSV = data => {
 
 module.exports = {
   parseUrls,
+  parsePath,
   exportToCSV
 };
